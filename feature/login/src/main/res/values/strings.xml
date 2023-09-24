@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="head_title_top">Millions of songs.</string>
+    <string name="head_title_bottom">Free on Spotify.</string>
+
+    <string name="log_in_btn">Log in</string>
+</resources>

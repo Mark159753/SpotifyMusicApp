@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="top_play_lists_title">Top play lists</string>
+    <string name="mood_lists_title">For good mood</string>
+    <string name="rock_lists_title">Rock</string>
+    <string name="workout_lists_title">Workout</string>
+    <string name="gaming_lists_title">Gaming</string>
+    <string name="indie_lists_title">Indie</string>
+</resources>
