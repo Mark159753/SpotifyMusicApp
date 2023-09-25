@@ -1,6 +1,7 @@
 package com.example.home.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -32,6 +33,7 @@ import kotlinx.collections.immutable.toImmutableList
 @Composable
 fun RecommendationBlock(
     modifier: Modifier = Modifier,
+    onClick:(AlbumModel)->Unit = {},
     items:ImmutableList<AlbumModel>
 ){
     FlowRow(
@@ -45,7 +47,8 @@ fun RecommendationBlock(
             RecommendationItem(
                 model = item,
                 modifier = Modifier
-                    .weight(1f)
+                    .weight(1f),
+                onClick = onClick
             )
         }
     }
@@ -54,6 +57,7 @@ fun RecommendationBlock(
 @Composable
 fun RecommendationItem(
     modifier: Modifier = Modifier,
+    onClick:(AlbumModel)->Unit = {},
     model:AlbumModel
 ){
     val context = LocalContext.current
@@ -62,7 +66,8 @@ fun RecommendationItem(
         modifier = modifier
             .height(62.dp)
             .clip(RoundedCornerShape(6.dp))
-            .background(MaterialTheme.colorScheme.surface),
+            .background(MaterialTheme.colorScheme.surface)
+            .clickable { onClick(model) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(

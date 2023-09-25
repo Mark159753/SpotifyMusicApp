@@ -1,25 +1,19 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id(Libraries.hiltPlugin)
 }
 
 android {
-    namespace = "com.example.spotifymusicapp"
+    namespace = "com.example.tracks_list"
     compileSdk = SdkVersions.COMPILE_SDK
 
     defaultConfig {
-        applicationId = "com.example.spotifymusicapp"
         minSdk = SdkVersions.MIN_SDK
-        targetSdk = SdkVersions.TARGET_SDK
-        versionCode = CodeVersions.VERSION
-        versionName = CodeVersions.NAME
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -44,11 +38,6 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.composeCompilerExtension
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
@@ -63,19 +52,9 @@ dependencies {
     //Navigation
     navigation()
 
-    //WorkManager
-    workManager()
-
-    //SplashScreen
-    splashScreen()
-
     //Project modules
     implementation(project(":core:common"))
+    implementation(project(":core:data"))
     implementation(project(":core:ui"))
-    implementation(project(":core:localData"))
-    implementation(project(":feature:login"))
-    implementation(project(":feature:home"))
-    implementation(project(":feature:search"))
-    implementation(project(":feature:favorites"))
-    implementation(project(":feature:tracks-list"))
+    implementation(project(":core:domain"))
 }

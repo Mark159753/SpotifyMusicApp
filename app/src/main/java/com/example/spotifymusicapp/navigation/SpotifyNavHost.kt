@@ -15,6 +15,8 @@ import com.example.home.navigation.navigateToHome
 import com.example.login.navigation.LoginNavigationRoute
 import com.example.login.navigation.loginScreen
 import com.example.search.navigation.searchScreen
+import com.example.tracks_list.navigation.navigateToTracksList
+import com.example.tracks_list.navigation.tracksListScreen
 
 @Composable
 fun SpotifyNavHost(
@@ -45,10 +47,22 @@ fun SpotifyNavHost(
         )
 
         homeScreen(
-            contentPadding = contentPadding
+            contentPadding = contentPadding,
+            onNavToTracksList = { album ->
+                if (navController.currentBackStackEntry?.lifecycleIsResumed() == true){
+                    navController.navigateToTracksList()
+                }
+            }
         )
         searchScreen()
         favoritesScreen()
+        tracksListScreen(
+            onNavBack = {
+                if (navController.currentBackStackEntry?.lifecycleIsResumed() == true){
+                    navController.popBackStack()
+                }
+            }
+        )
 
     }
 }

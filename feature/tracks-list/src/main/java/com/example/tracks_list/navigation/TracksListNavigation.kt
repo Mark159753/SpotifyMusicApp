@@ -1,26 +1,23 @@
-package com.example.home.navigation
+package com.example.tracks_list.navigation
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.example.data.models.albums.AlbumModel
-import com.example.home.ui.HomeRoute
+import com.example.tracks_list.ui.TracksListsRoute
 
-const val HomeNavigationRoute = "home_route"
+const val TracksListNavigationRoute = "tracks_list_route"
 
-fun NavController.navigateToHome(navOptions: NavOptions? = null) {
-    this.navigate(HomeNavigationRoute, navOptions)
+fun NavController.navigateToTracksList(navOptions: NavOptions? = null) {
+    this.navigate(TracksListNavigationRoute, navOptions)
 }
 
-fun NavGraphBuilder.homeScreen(
-    contentPadding: PaddingValues,
-    onNavToTracksList:(AlbumModel)->Unit = {},
+fun NavGraphBuilder.tracksListScreen(
+    onNavBack:()->Unit,
     enterTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?)? = null,
     exitTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition?)? = null,
     popEnterTransition: (
@@ -31,15 +28,14 @@ fun NavGraphBuilder.homeScreen(
     )? = exitTransition,
 ) {
     composable(
-        route = HomeNavigationRoute,
+        route = TracksListNavigationRoute,
         enterTransition = enterTransition,
         exitTransition = exitTransition,
         popExitTransition = popExitTransition,
         popEnterTransition = popEnterTransition
     ) {
-        HomeRoute(
-            contentPadding = contentPadding,
-            onNavToTracksList = onNavToTracksList
+        TracksListsRoute(
+            onNavBack = onNavBack
         )
     }
 }

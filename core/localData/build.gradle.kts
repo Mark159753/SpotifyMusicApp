@@ -75,11 +75,6 @@ protobuf {
                     option("lite")
                 }
             }
-//            task.builtins {
-//                java {
-//
-//                }
-//            }
         }
     }
 }

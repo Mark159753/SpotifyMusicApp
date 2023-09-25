@@ -33,6 +33,7 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun HomeRoute(
     contentPadding: PaddingValues,
+    onNavToTracksList:(AlbumModel)->Unit = {},
     viewModel: HomeViewModel = hiltViewModel(),
 ){
     val releasesAlbums by viewModel.releasesAlbums.collectAsStateWithLifecycle(initialValue = emptyList())
@@ -52,6 +53,7 @@ fun HomeRoute(
         recommendations = recommendations.toImmutableList(),
         playListsSections = viewModel.playLists.toImmutableList(),
         userName = user?.name ?: "",
+        onAlbumClick = onNavToTracksList,
         contentPadding = contentPadding
     )
 }
@@ -62,6 +64,7 @@ fun HomeScreen(
     recommendations:ImmutableList<AlbumModel>,
     playListsSections:ImmutableList<PlaylistWithCategory<PlaylistModel>>,
     userName:String = "",
+    onAlbumClick:(AlbumModel)->Unit = {},
     contentPadding: PaddingValues = PaddingValues()
 ){
     LazyColumn(
@@ -85,7 +88,8 @@ fun HomeScreen(
             RecommendationBlock(
                 items = recommendations,
                 modifier = Modifier
-                    .padding(horizontal = 16.dp)
+                    .padding(horizontal = 16.dp),
+                onClick = onAlbumClick
             )
         }
 
