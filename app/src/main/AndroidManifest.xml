@@ -33,6 +33,8 @@
             tools:node="remove">
         </provider>
 
+        <profileable android:shell="true"/>
+
     </application>
 
 </manifest>

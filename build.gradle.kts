@@ -4,4 +4,5 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.8.10" apply false
     id("com.android.library") version "8.1.1" apply false
     id(Libraries.hiltPlugin) version Versions.hilt apply false
+    id("com.android.test") version "8.1.1" apply false
 }

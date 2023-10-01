@@ -1,0 +1,34 @@
+name: "Build APK in release mode"
+
+on:
+  push:
+    branches: [for_test]
+
+jobs:
+  android-build:
+    name: Android Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+      - name: Set up our JDK environment
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu' # See 'Supported distributions' for available options
+          java-version: '17'
+          cache: 'gradle'
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+          # Run Build Project
+      - name: Build gradle project
+        run: ./gradlew build
+        # Create APK Release
+      - name: Build apk release project (APK) - app module
+        run: ./gradlew assemble
+
+        # Noted For Output [main_project_module]/build/outputs/apk/release/
+      - name: Upload APK Release - gubadoo-android
+        uses: actions/upload-artifact@v3
+        with:
+         name: ${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - APK(s) release generated
+         path: app/build/outputs/apk/release/

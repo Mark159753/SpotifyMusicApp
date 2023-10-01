@@ -12,9 +12,12 @@ import androidx.compose.material.Text
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -25,7 +28,9 @@ import com.example.spotifymusicapp.navigation.SpotifyNavHost
 import com.example.ui.components.SpotifyBottomNavigation
 import com.example.ui.components.SpotifyNavigationBarItem
 
-@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class,
+    ExperimentalComposeUiApi::class
+)
 @Composable
 fun SpotifyApp(
     modifier: Modifier = Modifier,
@@ -33,7 +38,10 @@ fun SpotifyApp(
     isAuth:Boolean = false
 ){
     Scaffold(
-        modifier = modifier,
+        modifier = modifier
+            .semantics {
+                       testTagsAsResourceId = true
+            },
         bottomBar = {
             val isVisible = appState.currentBottomBarDestination != null
 

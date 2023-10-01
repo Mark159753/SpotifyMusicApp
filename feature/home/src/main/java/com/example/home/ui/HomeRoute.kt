@@ -18,6 +18,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -68,7 +72,9 @@ fun HomeScreen(
     contentPadding: PaddingValues = PaddingValues()
 ){
     LazyColumn(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .testTag("column_albums")
+            .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(18.dp),
         contentPadding = PaddingValues(bottom = contentPadding.calculateBottomPadding())
     ){
